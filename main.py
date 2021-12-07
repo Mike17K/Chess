@@ -1,0 +1,51 @@
+from pygame.constants import K_r, K_w
+import engine
+import fanctions
+import visuals
+import globalVariables
+import pygame 
+import time
+
+
+pygame.init()
+screen = visuals.createWindow()
+clock = pygame.time.Clock()
+
+
+gameState = [["bR","bN","bB","bQ","bK","bB","bN","bR",],
+["bp","bp","bp","bp","bp","bp","bp","bp",],
+["--","--","--","--","--","--","--","--"],
+["--","--","--","--","--","--","--","--"],
+["--","--","--","--","--","--","--","--"],
+["--","--","--","--","--","--","--","--"],
+["wp","wp","wp","wp","wp","wp","wp","wp"],
+["wR","wN","wB","wQ","wK","wB","wN","wR"]]
+    
+args= { 'gameState' : gameState , 'view': 1 , 'clickSignal': [None,False] , 'highlightedSquares': []}
+
+#fps mezure
+loops=0
+startTime=time.time()
+
+running = True
+while running:
+    
+    
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == K_r: args['view'] *= -1
+        if (event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.MOUSEBUTTONUP) and event.button==1: #left click handle
+            args['clickSignal'] = fanctions.clickHandler(args,event,pygame.mouse.get_pos())
+            #print(args['highlightedSquares'])
+
+    visuals.drawBoard(screen,args)
+
+    loops+=1
+    if loops==100: 
+        #print(100/(time.time()-startTime))
+        loops=0
+        startTime=time.time()
+
+    clock.tick(400) #loop max limit of the program is around 400 by now
