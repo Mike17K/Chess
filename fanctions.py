@@ -15,9 +15,6 @@ def capture(args,target,pieccePos):
     #normal chess
     #args['gameState'][target[1]][target[0]] = args['gameState'][pieccePos[1]][pieccePos[0]]
     
-
-    pass
-
 def move(args,pieccePos,targetPos):
     #add roke
     #unpasan
@@ -30,6 +27,8 @@ def move(args,pieccePos,targetPos):
 
     args['gameState'][pieccePos[1]][pieccePos[0]]='--'
     
+    addMoveToPath(args,pieccePos,targetPos)
+    
 
 def translateMove(): #in chess language
     pass
@@ -41,14 +40,43 @@ def translateCursorPosToSquares(pos,view):
     else:
         return [7-pos[0]//sq[0],7-pos[1]//sq[1]]
 
-def addMoveToPath():
-    pass
+def addMoveToPath(args,pieccePos,targetPos):
+    gs = []
+    for y in range(8):
+        gs.append([])
+        for x in range(8):
+            gs[y].append("--")
+            gs[y][x] = args['gameState'][y][x]
+    args['gameHistory'].append(gs)
 
-def undoMove():
-    pass
+    args['gameHistoryTrackMoves'].append([pieccePos,targetPos])
+    
+
+
+def undoMove(args):
+    if len(args['gameHistory'])>1:
+        for y in range(8):
+            for x in range(8):
+                args['gameState'][y][x] = args['gameHistory'][-2][y][x]
+        
+        args['gameHistory'] = args['gameHistory'][:-1]
+        args['highlightedSquares'] = args['gameHistoryTrackMoves'][-2]
+        args['gameHistoryTrackMoves'] = args['gameHistoryTrackMoves'][:-1]
+
+    if len(args['gameHistory'])==1:
+        args['highlightedSquares']=[]
+
+
 
 def truckAttackingSquares(array):
     pass
+
+def printBoard(gs):
+    for y in range(8):
+        for x in range(8):
+            print(gs[y][x],end = '  ')
+        print()
+    print()
 
 def updateVariables():
     pass

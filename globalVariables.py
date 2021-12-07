@@ -1,5 +1,5 @@
 background_colour = (234, 212, 252)
-windowDimentions = (400,400)
+windowDimentions = (800,800)
 squareDimentions = [min(windowDimentions[1],windowDimentions[0])//8,min(windowDimentions[1],windowDimentions[0])//8]
 captionText = "Atomic Chess Atempt"
 
