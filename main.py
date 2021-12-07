@@ -21,14 +21,9 @@ gameState = [["bR","bN","bB","bQ","bK","bB","bN","bR",],
 ["wp","wp","wp","wp","wp","wp","wp","wp"],
 ["wR","wN","wB","wQ","wK","wB","wN","wR"]]
     
-args= { 'gameState' : gameState , 'view': 1 , 'clickSignal': [None,False] , 'highlightedSquares': [] , 'gameHistory': [], 'gameHistoryTrackMoves': [[None,None]]}
-
-temp = []
-for y in range(8): #adding the starting pos in the history
-    temp.append([])
-    for x in range(8):
-        temp[y].append(args['gameState'][y][x])
-args['gameHistory'].append(temp)
+args= { 'gameState' : gameState , 'view': 1 , 'clickSignal': [None,False] , 'highlightedSquares': [] , 'gameHistory': [], 'gameHistoryTrackMoves': [[None,None]] , 'info':[]}
+args['gameHistory'] = [fanctions.copyArray(args['gameState'])]
+args['info'] = [[True,True,True,True,[]]] #Roke white-small ,white-big ,black-small ,black-big ,position of pownMovedTwoSquares
 
 #fps mezure
 loops=0
@@ -37,11 +32,6 @@ startTime=time.time()
 running = True
 
 while running:
-    
-
-    
-
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
