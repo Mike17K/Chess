@@ -12,16 +12,17 @@ screen = visuals.createWindow()
 clock = pygame.time.Clock()
 
 
+
 gameState = [["bR","bN","bB","bQ","bK","bB","bN","bR",],
 ["bp","bp","bp","bp","bp","bp","bp","bp",],
 ["--","--","--","--","--","--","--","--"],
-["--","--","--","--","--","--","--","--"],
-["--","--","--","--","--","--","--","--"],
+["--","--","--","--","--","bQ","--","--"],
+["--","--","--","wR","--","--","--","--"],
 ["--","--","--","--","--","--","--","--"],
 ["wp","wp","wp","wp","wp","wp","wp","wp"],
 ["wR","wN","wB","wQ","wK","wB","wN","wR"]]
     
-args= { 'gameState' : gameState , 'view': 1 , 'clickSignal': [None,False] , 'highlightedSquares': [] , 'gameHistory': [], 'gameHistoryTrackMoves': [[None,None]] , 'info':[]}
+args= { 'gameState' : gameState , 'view': 1 , 'clickSignal': [None,False] , 'highlightedSquares': [] , 'gameHistory': [], 'gameHistoryTrackMoves': [[None,None]] , 'info':[] , 'attacktedSquares': [[],[]]}
 args['gameHistory'] = [fanctions.copyArray(args['gameState'])]
 args['info'] = [[True,True,True,True,[]]] #Roke white-small ,white-big ,black-small ,black-big ,position of pownMovedTwoSquares
 
@@ -33,6 +34,7 @@ running = True
 
 while running:
     for event in pygame.event.get():
+        
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.KEYDOWN:
